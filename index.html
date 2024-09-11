@@ -69,6 +69,53 @@
         .data-table tr:nth-child(even) td {
             background-color: #ff4d4d; /* Alternating row color */
         }
+
+        /* Popup modal styling */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+
+        .modal-header {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d8000c; /* Red color for modal header */
+        }
+
+        .modal-body {
+            margin: 10px 0;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -90,6 +137,17 @@
         </table>
     </div>
 
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeBtn">&times;</span>
+            <div class="modal-header">Attention!</div>
+            <div class="modal-body">
+                <p>There is a crack detected in the sensor readings. Please check immediately!</p>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Firebase Realtime Database URL
         const firebaseUrl = 'https://tranquil-c2029-default-rtdb.firebaseio.com/sensorData.json';
@@ -109,6 +167,8 @@
         function updateTable(data) {
             const dataBody = document.getElementById('data-body');
             const alertDiv = document.getElementById('alert');
+            const modal = document.getElementById('myModal');
+            const closeBtn = document.getElementById('closeBtn');
 
             dataBody.innerHTML = '';
 
@@ -128,11 +188,27 @@
                 if (data.crack_detected) {
                     alertDiv.textContent = 'Crack Detected!';
                     alertDiv.style.display = 'block';
+                    
+                    // Show modal popup if crack detected
+                    modal.style.display = 'block';
                 } else {
                     alertDiv.style.display = 'none';
+                    modal.style.display = 'none';
                 }
             } else {
                 dataBody.innerHTML = '<tr><td colspan="4">No data available</td></tr>';
+            }
+        }
+
+        // Close the modal when the user clicks on <span> (x)
+        document.getElementById('closeBtn').onclick = function() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        // Close the modal when the user clicks anywhere outside of the modal
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('myModal')) {
+                document.getElementById('myModal').style.display = 'none';
             }
         }
 
