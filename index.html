@@ -5,44 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sensor Data Dashboard</title>
     <style>
+        /* Apply a background GIF with a red theme */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            background: url('background.gif') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff; /* White text color for better contrast */
         }
+
+        /* Container styling */
         .container {
             width: 80%;
             margin: 0 auto;
             padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background for readability */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
         }
+
+        /* Header styling */
         h1 {
             text-align: center;
+            color: #ff6f6f; /* Red color for header */
+            margin-bottom: 20px;
         }
+
+        /* Alert box styling */
+        .alert {
+            padding: 10px;
+            background-color: #ffdddd; /* Light red background for alert */
+            color: #d8000c; /* Red color for alert text */
+            border: 1px solid #d8000c;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none; /* Hidden by default */
+        }
+
+        /* Table styling */
         .data-table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
         }
+
         .data-table th, .data-table td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 12px;
             text-align: center;
         }
+
         .data-table th {
-            background-color: #f2f2f2;
+            background-color: #ff4d4d; /* Darker red for table headers */
+            color: #fff; /* White text color for headers */
         }
-        .alert {
-            padding: 10px;
-            background-color: #ffdddd;
-            color: #d8000c;
-            margin-bottom: 20px;
-            border: 1px solid #d8000c;
-            border-radius: 5px;
-            display: none;
+
+        .data-table td {
+            background-color: #ff6666; /* Light red for table data cells */
+            color: #fff; /* White text color for data cells */
+        }
+
+        .data-table tr:nth-child(even) td {
+            background-color: #ff4d4d; /* Alternating row color */
         }
     </style>
 </head>
